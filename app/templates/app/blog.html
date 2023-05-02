@@ -1,0 +1,43 @@
+﻿{% extends "app/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<hr class="contacts-line" />
+<!--<h3>{{ message }}</h3>-->
+
+<p>Мой тихий уголок, где я делюсь своими мыслями...</p>
+<br />
+{% if user.is_superuser %}
+<a href="{% url 'newpost' %}" class="btn__read" style="margin-bottom:30px;">Добавить статью</a>
+{% endif %}
+{% for post in posts %}
+<div class="card">
+    <div class="card-header">
+        <span style="opacity:0.8;">Категория:</span> &#8194; <span class="italic">{{ post.category }}</span>
+    </div>
+    <div class="card-body">
+        <div class="card__wrapper">
+            <div class="card-body__image">
+                {% if post.snapshot %}
+                <img src="{{ post.snapshot.url }}" alt="Изображение к посту" class="img-thumbnail mr-3">
+                {% else %}
+                <img src="{% static 'app/images/Image/nosnapshot.png' %}" alt="Изображение к посту" class="img-thumbnail mr-3">
+                {% endif %}
+            </div>
+            <div>
+                <h3 class="card-title"> {{post.title}} </h3>
+                <hr />
+                <p class="card-text blog">{{post.description}}</p>
+                <a href="{% url 'blogpost' parametr=post.id %}" class="btn__read">Читать далее</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        {{post.creation_date}}
+    </div>
+</div>
+<br />
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,15 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>Добавить пост</h2>
+
+<form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <div>
+        {{ blogform.as_p}}
+        <button type="submit" class="save btn btn-default"> Сохранить статью </button>
+    </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+﻿{% extends "app/layout.html" %}
+{% load static %}
+
+
+{% block content %}
+<h2>{{ title }}</h2>
+<hr class="hr-line" />
+<!--<h3>{{ message }}</h3>-->
+<section id="new_product">
+    <p>Если вы не нашли то что нужно то вы можете <a style="text-decoration:underline;" href="{% url 'order' %}"> оформить индивидуальный заказ </a> </p>
+
+    <h3>
+        Новые товары
+    </h3>
+    <hr class="hr-line" />
+    (В разработке)
+</section>
+<section id="all_product">
+    <h3>
+        Все товары
+    </h3>
+    <hr class="hr-line" />
+    (В разработке)
+</section>
+
+{% endblock %}

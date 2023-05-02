@@ -1,0 +1,21 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<h2>{{ title }}</h2>
+<hr class="hr-line" />
+<!--<h3>{{ message }}</h3>-->
+
+<section id="video">
+    <h3>
+        Процесс создания работы
+    </h3>
+    <video src="/media/video/short_video1.mp4" controls="controls" width="500" height="300" poster="/media/video/short_video_1_preview.jpg"></video>
+    <h3>
+        Процесс вышивки
+    </h3>
+    <video src="/media/video/short_video2.mp4" controls="controls" width="500" height="300" poster="/media/video/short_video_2_preview.jpg"></video>
+    <br />
+
+</section>
+
+{% endblock %}

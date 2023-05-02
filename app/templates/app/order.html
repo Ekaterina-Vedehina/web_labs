@@ -1,0 +1,96 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+{% if form != None %}
+
+<h2>{{ title }}</h2>
+<hr class="hr-line" />
+<p>{{ message }}</p>
+<div class="row">
+    <div class="col-md-8">
+        <section id="OrderForm">
+            <form enctype="multipart/form-data" method="post" class="form-horizontal">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}" class="col-md-4 control-label">{{ form.username.label }}</label>
+                    <div class="col-md-8">
+                        {{ form.username }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}" class="col-md-4 control-label">{{ form.age.label }}</label>
+                    <div class="col-md-8">
+                        {{ form.age }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.gender.id_for_label }}" class="col-md-4 control-label">{{ form.gender.label }}</label>
+                    <div class="col-md-8">
+                        {{ form.gender }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}" class="col-md-4 control-label">{{ form.email.label }}</label>
+                    <div class="col-md-8">
+                        {{ form.email }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.phone.id_for_label }}" class="col-md-4 control-label">{{ form.phone.label }}</label>
+                    <div class="col-md-8">
+                        {{ form.phone }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.address.id_for_label }}" class="col-md-4 control-label">{{ form.address.label }}</label>
+                    <div class="col-md-8">
+                        {{ form.address }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.date.id_for_label }}" class="col-md-4 control-label">{{ form.date.label }}</label>
+                    <div class="col-md-8 group-select">
+                        {{ form.date }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.description.id_for_label }}" class="col-md-4 control-label">{{ form.description.label }}</label>
+                    <div class="col-md-8">
+                        {{ form.description }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-7">
+                        <input type="hidden" name="next" value="/" />
+                        <input onmouseover="func1(this)" onmouseout="func2(this)" type="submit" value="Отправить" class="btn btn-default col-md-4" />
+                    </div>
+                </div>
+                {% if form.errors %}
+                <p class="validation-summary-errors"> Форма заполнена неправильно. Повторите ещё раз.</p>
+                {% endif %}
+            </form>
+        </section>
+    </div>
+</div>
+{% else %}
+<h2>Спасибо за заказ!</h2>
+<hr class="hr-line" />
+<p>Вами была предоставлена следующая информация:</p>
+<ul class="order-complited__info">
+    <li class="order-complited__info-item"> <strong>ФИО:</strong>&#8195;{{ data.username }}</li>
+    <li class="order-complited__info-item"> <strong>Возраст:</strong>&#8195;{{ data.age }}</li>
+    <li class="order-complited__info-item"> <strong>Пол:</strong>&#8195;{{ data.gender }}</li>
+    <li class="order-complited__info-item"> <strong>Почта:</strong>&#8195;{{ data.email }}</li>
+    <li class="order-complited__info-item"> <strong>Телефон:</strong>&#8195;{{ data.phone }}</li>
+    <li class="order-complited__info-item"> <strong>Адрес доставки:</strong>&#8195;{{ data.address }}</li>
+    <li class="order-complited__info-item"> <strong>Дата доставки:</strong>&#8195;{{ data.date }}</li>
+    <li class="order-complited__info-item"> <strong>Описание желаемой работы:</strong>&#8195;{{ data.description }}</li>
+</ul>
+{% endif %}
+{% load static %}
+<script src="{% static 'app/scripts/jquery.validate.min.js' %}"></script>
+{% endblock %}
+
+

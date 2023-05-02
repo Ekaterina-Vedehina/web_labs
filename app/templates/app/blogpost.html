@@ -1,0 +1,39 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<a href="{% url 'blog' %}" class="btn__read"> &#8592; Назад</a>
+<br />
+<hr />
+{% if post_1.snapshot %}
+<img src="{{ post_1.snapshot.url }}" alt="Изобр" style="max-width:400px !important" class="img-thumbnail mr-3">
+{% endif %}
+<h2> {{post_1.title}} </h2>
+<p> {{post_1.content|linebreaksbr}} </p> {# вывод текста по абзацам#}
+
+<h3> Комментарии </h3>
+{% if user.is_authenticated %}
+
+<div style="max-width:750px">
+    <form enctype="multipart/form-data" method="post" class="form-horizontal">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="{{ form.text.id_for_label }}" class="col-md-2 control-label">{{ form.text.label }}</label>
+            <div class="col-md-10">
+                {{ form.text }}
+            </div>
+        </div>
+        <button type="submit" value="Отправить" class="save btn btn-default">Отправить комментарий</button>
+    </form>
+</div>
+{% else %}
+    <p> Для добавления своего комментария, пожалуйста, авторизуйтесь. </p>
+{% endif %}
+
+{% for comment in comments %}
+<hr />
+<p>  <strong>{{comment.author}}</strong>,&#8194; <span style="color: #6e8569; ">{{comment.date}}</span> </p>
+<p> {{comment.text|linebreaksbr}}</p>
+<hr />
+{% endfor %}
+{% endblock %}
